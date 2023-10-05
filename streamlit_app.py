@@ -28,19 +28,28 @@ def main():
         st.write(f"素因数分解結果: {factors}")
         st.write(f"素因数分解にかかる時間: {elapsed_time:.4f} 秒")
 
-    if st.button("100回計測"):  # 100回計測ボタンを追加
+    if st.button("100回計測"):
         elapsed_times = []
-        for i in range(100):  # 100回計算
+        all_factors = []  # 素因数分解の結果を保存するリストを初期化
+        for i in range(100):
             start_time = time.time()
             factors = factorize(number_to_factorize)
             end_time = time.time()
             elapsed_time = end_time - start_time
             elapsed_times.append(elapsed_time)
+            all_factors.append(factors)  # 素因数分解の結果をリストに追加
+
         avg_elapsed_time = sum(elapsed_times) / len(elapsed_times)
         st.write(f"100回素因数分解の平均時間: {avg_elapsed_time:.4f} 秒")
+        
+        # 素因数分解の結果を表示
+        st.write("素因数分解結果 (最初の5回分のみ表示):")
+        for i, factors in enumerate(all_factors[:5], start=1):
+            st.write(f"計算{i}: {factors}")
 
 if __name__ == "__main__":
     main()
+
 
 
  
